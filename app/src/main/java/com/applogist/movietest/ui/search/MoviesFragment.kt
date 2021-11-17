@@ -2,11 +2,10 @@ package com.applogist.movietest.ui.search
 
 import android.os.Bundle
 import android.view.View
-import androidx.navigation.findNavController
 import com.applogist.movietest.BR
 import com.applogist.movietest.R
 import com.applogist.movietest.base.BaseFragment
-import com.applogist.movietest.databinding.FragmentMovieSearchBinding
+import com.applogist.movietest.databinding.FragmentMoviesBinding
 import com.applogist.movietest.databinding.ItemMovieLayoutBinding
 import com.applogist.movietest.network.response.MovieItemResponse
 import com.applogist.movietest.utils.loadImage
@@ -21,9 +20,9 @@ import com.murgupluoglu.request.STATUS_SUCCESS
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class MovieSearchFragment(override val layoutId: Int = R.layout.fragment_movie_search) :
+class MoviesFragment(override val layoutId: Int = R.layout.fragment_movies) :
     BaseFragment() {
-    private lateinit var binding: FragmentMovieSearchBinding
+    private lateinit var binding: FragmentMoviesBinding
     private val viewModel: MovieSearchViewModel by viewModel()
     lateinit var moviesAdapter: LastAdapter
 
@@ -32,11 +31,11 @@ class MovieSearchFragment(override val layoutId: Int = R.layout.fragment_movie_s
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
         initObserver()
-        searchButtonClickListener()
+        viewModel.getMovies()
     }
 
     override fun setUpBinding() {
-        binding = bBinding as FragmentMovieSearchBinding
+        binding = bBinding as FragmentMoviesBinding
     }
 
     private fun initObserver() {
@@ -47,7 +46,7 @@ class MovieSearchFragment(override val layoutId: Int = R.layout.fragment_movie_s
                 }
                 STATUS_SUCCESS -> {
                     hideProgressDialog()
-                    viewModel.addMovies(it.responseObject?.search)
+                    viewModel.addMovies(it.responseObject?.results)
                     moviesAdapter.notifyDataSetChanged()
                     KeyboardUtils.hideSoftInput(requireActivity())
                 }
@@ -63,32 +62,25 @@ class MovieSearchFragment(override val layoutId: Int = R.layout.fragment_movie_s
 
     private fun initAdapter() {
         moviesAdapter = LastAdapter(
-            viewModel.movieList,
+            viewModel.nowPlayingMovieList,
             BR.item
         ).map<MovieItemResponse>(Type<ItemMovieLayoutBinding>(R.layout.item_movie_layout).onBind { holder ->
             val data = holder.binding.item
             data?.let { movie ->
                 holder.binding.apply {
-                    movieImageView.loadImage(movie.poster)
+                    movieImageView.loadImage(movie.backdropPath)
                     movieNameTextView.text = movie.title
-                    movieTypeTextView.text = movie.type
                 }
             }
 
-        }.onClick { holder ->
+        }.onClick { holder ->/*
             val data = holder.binding.item
             data?.imdbID?.let { imdbID ->
                 val action = MovieSearchFragmentDirections.movieSearchToDetail(imdbID)
                 holder.binding.root.findNavController().navigate(action)
 
-            }
+            }*/
         }).into(binding.moviesRecyclerView)
-    }
-
-    private fun searchButtonClickListener() {
-        binding.searchButton.setOnClickListener {
-            viewModel.getMovies(binding.searchEditText.text.toString())
-        }
     }
 
 

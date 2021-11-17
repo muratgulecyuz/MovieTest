@@ -17,7 +17,6 @@ class MainActivity : BaseActivity(), NavController.OnDestinationChangedListener 
     private lateinit var navController: NavController
     override fun prepareView(savedInstanceState: Bundle?) {
         setUpNavigation()
-        backClickListener()
     }
 
     override fun getRootView(): View {
@@ -37,22 +36,13 @@ class MainActivity : BaseActivity(), NavController.OnDestinationChangedListener 
         destination: NavDestination,
         arguments: Bundle?
     ) {
-        binding.toolbar.navigationIcon = null
         when (destination.id) {
 
             R.id.movieDetailFragment -> {
-                binding.toolbar.setNavigationIcon(R.drawable.ic_back)
             }
 
             R.id.movieSearchFragment -> {
-                binding.titleTextView.text = getString(R.string.cinema)
             }
-        }
-    }
-
-    private fun backClickListener() {
-        binding.toolbar.setNavigationOnClickListener {
-            navController.popBackStack()
         }
     }
 

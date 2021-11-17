@@ -9,17 +9,17 @@ import com.murgupluoglu.request.RESPONSE
 import com.murgupluoglu.request.request
 
 class MovieSearchViewModel(private val serviceInterface: ServiceInterface) : ViewModel() {
-    val movieList = arrayListOf<MovieItemResponse>()
+    val nowPlayingMovieList = arrayListOf<MovieItemResponse>()
 
     val moviesResponse: MutableLiveData<RESPONSE<MovieResponse>> = MutableLiveData()
-    fun getMovies(searchKey: String = "") {
-        moviesResponse.request({ serviceInterface.getMovies(searchKey) })
+    fun getMovies() {
+        moviesResponse.request({ serviceInterface.getNowPlayingMovies() })
     }
 
     fun addMovies(receivedMovieList: List<MovieItemResponse>?) {
         receivedMovieList?.let {
-            movieList.clear()
-            movieList.addAll(it)
+            nowPlayingMovieList.clear()
+            nowPlayingMovieList.addAll(it.take(5))
         }
 
     }

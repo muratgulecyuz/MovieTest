@@ -8,9 +8,9 @@ import retrofit2.http.Query
 
 interface ServiceInterface {
 
-    @GET("?apiKey=$API_KEY")
-    suspend fun getMovies(
-        @Query("s") searchKey: String
+    @GET("movie/now_playing")
+    suspend fun getNowPlayingMovies(
+        @Query("api_key") apiKey: String = API_KEY,
     ): MovieResponse
 
     @GET("?apiKey=$API_KEY")

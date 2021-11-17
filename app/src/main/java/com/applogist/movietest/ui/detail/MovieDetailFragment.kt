@@ -45,7 +45,6 @@ class MovieDetailFragment(override val layoutId: Int = R.layout.fragment_movie_d
                     binding.movieImageView.loadImage(response?.poster)
                     binding.movieTypeTextView.text = response?.genre
                     binding.movieDescriptionTextView.text = response?.plot
-                    initToolbarTitle(response?.title)
                 }
                 STATUS_ERROR -> {
                     hideProgressDialog()
@@ -61,14 +60,6 @@ class MovieDetailFragment(override val layoutId: Int = R.layout.fragment_movie_d
 
         val imdbId = MovieDetailFragmentArgs.fromBundle(requireArguments()).imdbid
         viewModel.getMovieDetail(imdbId)
-
-    }
-
-    private fun initToolbarTitle(title: String?) {
-        title?.let {
-            (requireActivity() as? MainActivity)?.findViewById<TextView>(R.id.titleTextView)?.text =
-                title
-        }
 
     }
 
