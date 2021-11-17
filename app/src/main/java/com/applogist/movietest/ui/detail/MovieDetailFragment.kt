@@ -2,17 +2,12 @@ package com.applogist.movietest.ui.detail
 
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
-import com.applogist.movietest.MainActivity
 import com.applogist.movietest.R
 import com.applogist.movietest.base.BaseFragment
 import com.applogist.movietest.databinding.FragmentMovieDetailBinding
-import com.applogist.movietest.ui.search.MovieSearchViewModel
 import com.applogist.movietest.utils.loadImage
 import com.applogist.movietest.utils.showDialog
-import com.blankj.utilcode.util.KeyboardUtils
 import com.blankj.utilcode.util.LogUtils
-import com.google.android.material.appbar.MaterialToolbar
 import com.murgupluoglu.request.STATUS_ERROR
 import com.murgupluoglu.request.STATUS_LOADING
 import com.murgupluoglu.request.STATUS_SUCCESS

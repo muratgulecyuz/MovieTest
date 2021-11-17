@@ -13,6 +13,13 @@ interface ServiceInterface {
         @Query("api_key") apiKey: String = API_KEY,
     ): MovieResponse
 
+    @GET("movie/upcoming")
+    suspend fun getUpComingMovies(
+        @Query("api_key") apiKey: String = API_KEY,
+        @Query("page") page: Int,
+    ): MovieResponse
+
+
     @GET("?apiKey=$API_KEY")
     suspend fun getMovieDetail(
         @Query("i") imdbId: String

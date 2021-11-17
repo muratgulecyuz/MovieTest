@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/movieSearchFragment"
-        android:name="com.applogist.movietest.ui.search.MoviesFragment">
+        android:name="com.applogist.movietest.ui.movies.MoviesFragment">
         <action
             android:id="@+id/movieSearchToDetail"
             app:destination="@+id/movieDetailFragment"/>
