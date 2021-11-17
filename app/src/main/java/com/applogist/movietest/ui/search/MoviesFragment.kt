@@ -86,7 +86,7 @@ class MoviesFragment(override val layoutId: Int = R.layout.fragment_movies) :
 
             }*/
         })
-        binding.vpMovies.adapter = moviesAdapter
+        binding.nowPlayingViewPager.adapter = moviesAdapter
     }
 
 
