@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_movie"
+    app:startDestination="@id/movieSearchFragment">
+
+    <fragment
+        android:id="@+id/movieSearchFragment"
+        android:name="com.applogist.movietest.ui.search.MovieSearchFragment">
+        <action
+            android:id="@+id/movieSearchToDetail"
+            app:destination="@+id/movieDetailFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="com.applogist.movietest.ui.detail.MovieDetailFragment" >
+        <argument
+            android:name="IMDB_ID"
+            app:argType="string" />
+    </fragment>
+</navigation>
