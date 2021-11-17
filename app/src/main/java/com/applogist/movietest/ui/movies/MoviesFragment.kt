@@ -123,6 +123,7 @@ class MoviesFragment(override val layoutId: Int = R.layout.fragment_movies) :
             }
         })
         binding.nowPlayingViewPager.adapter = moviesAdapter
+        binding.dotsIndicator.setViewPager2(binding.nowPlayingViewPager)
     }
 
     private fun initUpComingMoviesAdapter() {
