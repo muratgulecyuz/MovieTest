@@ -11,16 +11,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        tools:background="@color/black">
 
         <ImageView
             android:id="@+id/movieImageView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="H,1:0.71"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/backgrounds/scenic" />
 
@@ -28,24 +25,29 @@
             android:id="@+id/movieNameTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:layout_marginStart="16dp"
-            android:textColor="@color/black"
-            android:textSize="16sp"
+            android:layout_marginEnd="16dp"
+            android:textColor="@color/white"
+            android:textSize="20sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/movieDescriptionTextView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/movieImageView"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="@id/movieImageView"
             tools:text="Batman" />
 
         <TextView
-            android:id="@+id/movieTypeTextView"
+            android:id="@+id/movieDescriptionTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_margin="16dp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/movieNameTextView"
-            app:layout_constraintTop_toBottomOf="@id/movieNameTextView"
-            tools:text="Action" />
+            app:layout_constraintStart_toStartOf="@id/movieImageView"
+            tools:text="Batman" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

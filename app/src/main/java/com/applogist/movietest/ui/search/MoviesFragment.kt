@@ -1,5 +1,6 @@
 package com.applogist.movietest.ui.search
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import com.applogist.movietest.BR
@@ -8,6 +9,7 @@ import com.applogist.movietest.base.BaseFragment
 import com.applogist.movietest.databinding.FragmentMoviesBinding
 import com.applogist.movietest.databinding.ItemMovieLayoutBinding
 import com.applogist.movietest.network.response.MovieItemResponse
+import com.applogist.movietest.utils.formatDate
 import com.applogist.movietest.utils.loadImage
 import com.applogist.movietest.utils.showDialog
 import com.blankj.utilcode.util.KeyboardUtils
@@ -60,6 +62,7 @@ class MoviesFragment(override val layoutId: Int = R.layout.fragment_movies) :
         })
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initAdapter() {
         moviesAdapter = LastAdapter(
             viewModel.nowPlayingMovieList,
@@ -69,7 +72,9 @@ class MoviesFragment(override val layoutId: Int = R.layout.fragment_movies) :
             data?.let { movie ->
                 holder.binding.apply {
                     movieImageView.loadImage(movie.backdropPath)
-                    movieNameTextView.text = movie.title
+                    movieNameTextView.text = "${movie.title} (${movie.releaseDate.formatDate()})"
+
+                    movieDescriptionTextView.text = movie.overview
                 }
             }
 
@@ -80,7 +85,8 @@ class MoviesFragment(override val layoutId: Int = R.layout.fragment_movies) :
                 holder.binding.root.findNavController().navigate(action)
 
             }*/
-        }).into(binding.moviesRecyclerView)
+        })
+        binding.vpMovies.adapter = moviesAdapter
     }
 
 
