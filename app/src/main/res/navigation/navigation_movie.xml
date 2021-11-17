@@ -16,7 +16,7 @@
         android:id="@+id/movieDetailFragment"
         android:name="com.applogist.movietest.ui.detail.MovieDetailFragment" >
         <argument
-            android:name="IMDB_ID"
-            app:argType="string" />
+            android:name="movieId"
+            app:argType="integer" />
     </fragment>
 </navigation>

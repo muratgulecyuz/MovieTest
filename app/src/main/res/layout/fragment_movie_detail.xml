@@ -10,24 +10,63 @@
             android:id="@+id/movieImageView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintDimensionRatio="H,2:3"
+            app:layout_constraintDimensionRatio="H,1:0.71"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.6"
-            tools:src="@tools:sample/avatars" />
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <LinearLayout
+            android:id="@+id/generalInfoContainer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/movieImageView">
+
+            <TextView
+                android:id="@+id/imdbTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="IMDB:"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/ic_star" />
+
+            <TextView
+                android:id="@+id/imdbTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                tools:text="7.5/10" />
+
+            <TextView
+                android:id="@+id/dateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="15.05.2021"
+                android:layout_marginStart="8dp"/>
+        </LinearLayout>
+
 
         <TextView
-            android:id="@+id/movieTypeTextView"
+            android:id="@+id/movieNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/movieImageView"
+            app:layout_constraintTop_toBottomOf="@id/generalInfoContainer"
             tools:text="Action, Adventure" />
 
         <TextView
@@ -35,10 +74,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:textColor="@color/black"
+            android:textSize="15sp"
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/movieTypeTextView"
-            app:layout_constraintTop_toBottomOf="@id/movieTypeTextView"
+            app:layout_constraintStart_toStartOf="@id/movieNameTextView"
+            app:layout_constraintTop_toBottomOf="@id/movieNameTextView"
             tools:text="DescDescDescDescDescDescDescDescDescDescDescDescDescDescDescDescDescDescDescDescDescDescDescDescDescDescDescDescDescDesc" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

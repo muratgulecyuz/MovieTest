@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import androidx.paging.LoadState
 import com.applogist.movietest.BR
 import com.applogist.movietest.R
@@ -113,26 +114,30 @@ class MoviesFragment(override val layoutId: Int = R.layout.fragment_movies) :
                 }
             }
 
-        }.onClick { holder ->/*
+        }.onClick { holder ->
             val data = holder.binding.item
-            data?.imdbID?.let { imdbID ->
-                val action = MovieSearchFragmentDirections.movieSearchToDetail(imdbID)
+            data?.id?.let { id ->
+                val action = MoviesFragmentDirections.movieSearchToDetail(id)
                 holder.binding.root.findNavController().navigate(action)
 
-            }*/
+            }
         })
         binding.nowPlayingViewPager.adapter = moviesAdapter
     }
 
     private fun initUpComingMoviesAdapter() {
 
-        upComingPagingAdapter = UpComingMoviesAdapter { data ->
-            recyclerViewItemClick(data)
+        upComingPagingAdapter = UpComingMoviesAdapter { data, view ->
+            recyclerViewItemClick(data, view)
         }
         binding.upComingRecyclerView?.adapter = upComingPagingAdapter
     }
 
-    private fun recyclerViewItemClick(item: MovieItemResponse?) {
+    private fun recyclerViewItemClick(item: MovieItemResponse?, view: View) {
+        item?.id?.let { id ->
+            val action = MoviesFragmentDirections.movieSearchToDetail(id)
+            view.findNavController().navigate(action)
+        }
 
     }
 

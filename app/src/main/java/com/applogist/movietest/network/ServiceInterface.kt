@@ -1,9 +1,11 @@
 package com.applogist.movietest.network
 
 import com.applogist.movietest.network.response.MovieDetailResponse
+import com.applogist.movietest.network.response.MovieItemResponse
 import com.applogist.movietest.network.response.MovieResponse
 import com.applogist.movietest.utils.API_KEY
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ServiceInterface {
@@ -20,8 +22,9 @@ interface ServiceInterface {
     ): MovieResponse
 
 
-    @GET("?apiKey=$API_KEY")
+    @GET("movie/{movie_id}")
     suspend fun getMovieDetail(
-        @Query("i") imdbId: String
+        @Path("movie_id") movieId: Int,
+        @Query("api_key") apiKey: String = API_KEY,
     ): MovieDetailResponse
 }

@@ -5,6 +5,9 @@ import android.view.View
 import com.applogist.movietest.R
 import com.applogist.movietest.base.BaseFragment
 import com.applogist.movietest.databinding.FragmentMovieDetailBinding
+import com.applogist.movietest.network.response.MovieDetailResponse
+import com.applogist.movietest.utils.DEFAULT_DATE_FORMAT
+import com.applogist.movietest.utils.formatDate
 import com.applogist.movietest.utils.loadImage
 import com.applogist.movietest.utils.showDialog
 import com.blankj.utilcode.util.LogUtils
@@ -37,9 +40,9 @@ class MovieDetailFragment(override val layoutId: Int = R.layout.fragment_movie_d
                 STATUS_SUCCESS -> {
                     hideProgressDialog()
                     val response = it.responseObject
-                    binding.movieImageView.loadImage(response?.poster)
-                    binding.movieTypeTextView.text = response?.genre
-                    binding.movieDescriptionTextView.text = response?.plot
+                    response?.let { result ->
+                        initUi(result)
+                    }
                 }
                 STATUS_ERROR -> {
                     hideProgressDialog()
@@ -51,10 +54,18 @@ class MovieDetailFragment(override val layoutId: Int = R.layout.fragment_movie_d
         })
     }
 
+    private fun initUi(movieDetailResponse: MovieDetailResponse) {
+        binding.movieImageView.loadImage(movieDetailResponse.backdropPath)
+        binding.movieNameTextView.text = movieDetailResponse.title
+        binding.movieDescriptionTextView.text = movieDetailResponse.overview
+        binding.imdbTextView.text = "${movieDetailResponse.voteAverage}/10"
+        binding.dateTextView.text = movieDetailResponse.releaseDate.formatDate(DEFAULT_DATE_FORMAT)
+    }
+
     private fun getBundle() {
 
-        val imdbId = MovieDetailFragmentArgs.fromBundle(requireArguments()).imdbid
-        viewModel.getMovieDetail(imdbId)
+        val movieId = MovieDetailFragmentArgs.fromBundle(requireArguments()).movieId
+        viewModel.getMovieDetail(movieId)
 
     }
 

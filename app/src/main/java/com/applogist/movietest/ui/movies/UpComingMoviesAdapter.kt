@@ -16,7 +16,7 @@ import com.applogist.movietest.utils.DEFAULT_DATE_FORMAT
 import com.applogist.movietest.utils.formatDate
 import com.applogist.movietest.utils.loadImage
 
-class UpComingMoviesAdapter(private val clickListener: (MovieItemResponse?) -> Unit) :
+class UpComingMoviesAdapter(private val clickListener: (MovieItemResponse?,View) -> Unit) :
     PagingDataAdapter<MovieItemResponse, UpComingMoviesViewHolder>(
         POST_COMPARATOR
     ) {
@@ -66,7 +66,7 @@ class UpComingMoviesAdapter(private val clickListener: (MovieItemResponse?) -> U
 
 class UpComingMoviesViewHolder(
     view: View,
-    private val clickListener: (MovieItemResponse?) -> Unit
+    private val clickListener: (MovieItemResponse?,View) -> Unit
 ) :
     RecyclerView.ViewHolder(view) {
 
@@ -81,7 +81,7 @@ class UpComingMoviesViewHolder(
     companion object {
         fun create(
             parent: ViewGroup,
-            clickListener: (MovieItemResponse?) -> Unit
+            clickListener: (MovieItemResponse?,View) -> Unit
         ): UpComingMoviesViewHolder {
             val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_upcoming_layout, parent, false)
@@ -93,7 +93,7 @@ class UpComingMoviesViewHolder(
 
     fun bind(model: MovieItemResponse) {
         container.setOnClickListener {
-            clickListener(model)
+            clickListener(model,it)
         }
 
         movieImageView.loadImage(model.backdropPath)
